@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("registration-form");
   const feedbackDiv = document.getElementById("form-feedback");
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
     const username = document.getElementById("username").value.trim();
     const email = document.getElementById("email").value.trim();
@@ -14,19 +14,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let isValid = true;
     const messages = [];
 
-    if (username.length < 3) {
+    // Username Validation
+    if (username === "") {
       isValid = false;
-      messages.push("Username must be at least 3 characters long.");
+      messages.push("Username is required.");
     }
 
+    // Email Validation
     if (!email.includes("@") || !email.includes(".")) {
       isValid = false;
       messages.push("Please enter a valid email address.");
     }
 
-    if (password.length < 8) {
+    // Password Validation
+    if (password.length < 6) {
       isValid = false;
-      messages.push("Password must be at least 8 characters long.");
+      messages.push("Password must be at least 6 characters long.");
     }
 
     feedbackDiv.style.display = "block";
@@ -34,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isValid) {
       feedbackDiv.textContent = "Registration successful!";
       feedbackDiv.style.color = "#28a745";
-      // Optionally: form.reset();
     } else {
       feedbackDiv.innerHTML = messages.join("<br>");
       feedbackDiv.style.color = "#dc3545";
