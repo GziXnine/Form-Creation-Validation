@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messages = [];
 
     // Username Validation
-    if (username === "") {
+    if (username.length === 0) {
       isValid = false;
       messages.push("Username is required.");
     }
